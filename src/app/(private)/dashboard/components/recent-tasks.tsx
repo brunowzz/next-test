@@ -99,7 +99,7 @@ export function RecentTasks() {
       <div className="text-center py-8 text-muted-foreground">
         <p>Nenhuma tarefa encontrada.</p>
         <Button asChild variant="link" className="mt-2 text-violet-600">
-          <Link href="/dashboard/tasks">
+          <Link href="/tasks">
             Criar uma nova tarefa <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </Button>
@@ -131,7 +131,7 @@ export function RecentTasks() {
 
       <div className="text-center pt-4">
         <Button asChild variant="outline" className="text-violet-600">
-          <Link href="/dashboard/tasks">
+          <Link href="/tasks">
             Ver todas as tarefas <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </Button>
