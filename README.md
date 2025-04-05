@@ -76,6 +76,10 @@ NEXTAUTH_URL="http://localhost:3000"
 4. Set up the database:
 
 ```bash
+# Generate Prisma client
+pnpm prisma generate
+
+# Create and apply migrations
 pnpm prisma migrate dev --name init
 ```
 
