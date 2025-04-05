@@ -2,14 +2,15 @@ import { compare } from 'bcryptjs'
 import type { NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 
+import { userSchema } from '@/app/(public)/login/schemas/login.schemas'
+
 import { db } from '@/database/prisma.service'
-import { loginSchema } from '@/schemas/loginSchema'
 
 export const authConfig = {
     providers: [
         Credentials({
             authorize: async (crendetials) => {
-                const { success, data } = loginSchema.safeParse(crendetials)
+                const { success, data } = userSchema.safeParse(crendetials)
 
                 if (!success) {
                     return null

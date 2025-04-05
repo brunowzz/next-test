@@ -16,7 +16,6 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     adapter: PrismaAdapter(db),
     callbacks: {
         signIn() {
-            console.log('signIn callback')
             return true
         },
         async jwt({ token }) {
@@ -31,8 +30,6 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
             return token
         },
         session({ session, token }) {
-            console.log('Session Callback')
-
             if (token.sub) {
                 session.user.id = token.sub
             }
