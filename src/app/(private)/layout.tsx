@@ -1,4 +1,4 @@
-import { NextAuthProvider } from '../context/auth-provider'
+import { NextAuthProvider } from '../../context/auth-provider'
 import type { Metadata } from 'next'
 import type React from 'react'
 
