@@ -178,6 +178,7 @@ export default function RegisterPage() {
                                             <FormControl>
                                                 <Checkbox
                                                     checked={field.value}
+                                                    name="acceptTerms"
                                                     onCheckedChange={(
                                                         checked
                                                     ) =>
