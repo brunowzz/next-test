@@ -3,6 +3,8 @@
 import { hash } from 'bcryptjs'
 import { z } from 'zod'
 
+import { signIn } from '@/lib/auth'
+
 import { registerSchema } from './schemas/register.schemas'
 import {
     createUser,
@@ -38,6 +40,11 @@ export async function registerUser(values: z.infer<typeof registerSchema>) {
             error: 'Something went wrong',
         }
     }
+
+    await signIn('credentials', {
+        ...values,
+        redirectTo: '/dashboard',
+    })
 
     return { success: true }
 }
