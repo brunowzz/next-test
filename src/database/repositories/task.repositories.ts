@@ -1,42 +1,97 @@
-import { Prisma, PrismaClient, Task } from '@prisma/client'
+import { db } from '../prisma.service'
+import { EnumStatus, PriorityEnum, type Prisma } from '@prisma/client'
 
-export class TaskRepository {
-    private prisma: PrismaClient
-
-    constructor() {
-        this.prisma = new PrismaClient()
-    }
-
-    async createTask(data: Prisma.TaskCreateInput): Promise<Task> {
-        return this.prisma.task.create({
-            data,
+export async function createTask(createDto: Prisma.TaskUncheckedCreateInput) {
+    try {
+        const task = await db.task.create({
+            data: createDto,
         })
+        return task
+    } catch (error) {
+        throw error
     }
+}
 
-    async getTaskById(id: string): Promise<Task | null> {
-        return this.prisma.task.findUnique({
-            where: { id },
-        })
-    }
+export async function findTasks(userId: string) {
+    return await db.task.findMany({
+        where: {
+            userId,
+        },
+        orderBy: [
+            { favorite: 'desc' },
+            { priority: 'asc' },
+            { createdAt: 'desc' },
+        ],
+    })
+}
 
-    async getAllTasks(): Promise<Task[]> {
-        return this.prisma.task.findMany()
-    }
+export async function updateTask(
+    id: string,
+    updateDto: Prisma.TaskUpdateInput
+) {
+    return await db.task.update({
+        where: { id },
+        data: updateDto,
+    })
+}
 
-    async updateTask(data: Prisma.TaskUpdateArgs): Promise<Task> {
-        const { id, ...updateData } = data.data as Prisma.TaskUpdateInput
-        if (typeof id !== 'string') {
-            throw new Error('Invalid id: id must be a string')
-        }
-        return this.prisma.task.update({
-            where: { id },
-            data: updateData,
-        })
-    }
+export async function deleteTask(id: string) {
+    return await db.task.delete({
+        where: { id },
+    })
+}
 
-    async deleteTask(id: string): Promise<Task> {
-        return this.prisma.task.delete({
-            where: { id },
-        })
+export async function getDashboardStats(userId: string) {
+    const [total, completed, inProgress, todo, highPriority] =
+        await Promise.all([
+            db.task.count({ where: { userId } }),
+            db.task.count({ where: { userId, status: EnumStatus.DONE } }),
+            db.task.count({
+                where: { userId, status: EnumStatus.IN_PROGRESS },
+            }),
+            db.task.count({ where: { userId, status: EnumStatus.TODO } }),
+            db.task.count({ where: { userId, priority: PriorityEnum.HIGH } }),
+        ])
+
+    return {
+        total,
+        completed,
+        inProgress,
+        todo,
+        highPriority,
     }
+}
+
+export async function getRecentTasks(userId: string) {
+    return await db.task.findMany({
+        where: { userId },
+        orderBy: { createdAt: 'desc' },
+        take: 5,
+    })
+}
+
+export async function getTasksByStatus(userId: string) {
+    const tasks = await db.task.groupBy({
+        by: ['status'],
+        where: { userId },
+        _count: true,
+    })
+
+    return tasks.map((item) => ({
+        name: item.status,
+        value: item._count,
+    }))
+}
+
+export async function getTasksByPriority(userId: string) {
+    const tasks = await db.task.groupBy({
+        by: ['priority'],
+        where: { userId },
+        _count: true,
+    })
+
+    return tasks.map((item) => ({
+        name: item.priority,
+        value: item._count,
+    }))
 }
