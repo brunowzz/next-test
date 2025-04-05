@@ -1,5 +1,7 @@
 'use client'
 
+import { TaskPriorityBadge } from '../../../../components/task-priority-badge'
+import { TaskStatusBadge } from '../../../../components/task-status-badge'
 import {
     onChangeTask,
     onCreateTask,
@@ -24,8 +26,6 @@ import {
 
 import { TaskActions } from './task-actions'
 import { TaskDialog, TaskFormValues } from './task-dialog'
-import { TaskPriorityBadge } from './task-priority-badge'
-import { TaskStatusBadge } from './task-status-badge'
 
 export function TasksTable({
     tasks = [],

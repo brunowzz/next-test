@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { auth } from '@/lib/auth'
+
 import { Button } from '@/components/ui/button'
 import {
     Card,
@@ -14,6 +16,13 @@ import { DashboardStats } from './components/dashboard-stats'
 import { RecentTasks } from './components/recent-tasks'
 
 export default async function DashboardPage() {
+    const session = await auth()
+    const userId = session?.user?.id
+
+    if (!userId) {
+        return null
+    }
+
     return (
         <div className="flex-1 space-y-6 p-8">
             <div className="flex items-center justify-between">
@@ -25,7 +34,7 @@ export default async function DashboardPage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                <DashboardStats />
+                <DashboardStats userId={userId} />
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
@@ -36,8 +45,8 @@ export default async function DashboardPage() {
                             Distribuição de tarefas por status atual
                         </CardDescription>
                     </CardHeader>
-                    <CardContent className="pl-2">
-                        <DashboardCharts />
+                    <CardContent className="flex h-full items-center pl-2">
+                        <DashboardCharts userId={userId} />
                     </CardContent>
                 </Card>
                 <Card className="col-span-3">
@@ -48,7 +57,7 @@ export default async function DashboardPage() {
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <DashboardCharts type="priority" />
+                        <DashboardCharts type="priority" userId={userId} />
                     </CardContent>
                 </Card>
             </div>
@@ -62,7 +71,7 @@ export default async function DashboardPage() {
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <RecentTasks />
+                        <RecentTasks userId={userId} />
                     </CardContent>
                 </Card>
             </div>
