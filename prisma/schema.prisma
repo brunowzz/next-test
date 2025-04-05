@@ -1,11 +1,56 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Task      Task[]
+  Account   Account[]
+  @@map("users")
+}
+
+model Account {
+  userId            String  @db.Uuid
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Task {
+  id          String       @id @default(cuid())
+  name        String
+  description String?
+  userId      String
+  status      EnumStatus   @default(TODO)
+  priority    PriorityEnum @default(MEDIUM)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum EnumStatus {
@@ -18,31 +63,4 @@ enum PriorityEnum {
   LOW
   MEDIUM
   HIGH
-}
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Task      Task[]
-}
-
-model Task {
-  id          String       @id @default(cuid())
-  name        String
-  description String?
-  userId      String
-  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  status      EnumStatus   @default(TODO)
-  priority    PriorityEnum @default(MEDIUM)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
 }
