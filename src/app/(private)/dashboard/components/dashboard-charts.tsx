@@ -1,36 +1,14 @@
-import { EnumStatus, PriorityEnum } from '@prisma/client'
 import {
-    Bar,
-    BarChart,
-    Cell,
-    Pie,
-    PieChart,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis,
-} from 'recharts'
-
-import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart'
-
-import {
-    DashboardChartsContent,
+    ChartProps,
     DashboardChartsContentTasksProps,
-} from './dashboard-charts-content'
+} from '../dashboard.types'
+import { EnumStatus, PriorityEnum } from '@prisma/client'
+
+import { DashboardChartsContent } from './dashboard-charts-content'
 import {
     getTasksByPriority,
     getTasksByStatus,
 } from '@/database/repositories/task.repositories'
-
-interface Task {
-    id: string
-    title: string
-    description: string
-    status: 'A Fazer' | 'Em Andamento' | 'Concluída'
-    priority: 'Alta' | 'Média' | 'Baixa'
-    favorite: boolean
-    createdAt: string
-}
 
 async function getTasks(
     userId: string
@@ -74,11 +52,6 @@ async function fetchTasksByPriority(
         { name: 'Média', value: mediumPriorityTasks.length, color: '#f59e0b' },
         { name: 'Baixa', value: lowPriorityTasks.length, color: '#10b981' },
     ]
-}
-
-export interface ChartProps {
-    type?: 'status' | 'priority'
-    userId: string
 }
 
 export async function DashboardCharts({ type = 'status', userId }: ChartProps) {

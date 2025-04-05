@@ -1,4 +1,7 @@
 import { $Enums } from '@prisma/client'
+import { z } from 'zod'
+
+import { taskFormSchema } from './schemas/task.schema'
 
 export type TaskStatus = 'A Fazer' | 'Em Andamento' | 'Concluída'
 export type TaskPriority = 'Alta' | 'Média' | 'Baixa'
@@ -17,6 +20,16 @@ export interface Task {
 
 export interface TasksTableProps {
     tasks: Task[]
+}
+
+export type TaskFormValues = z.infer<typeof taskFormSchema>
+
+export interface TaskDialogProps {
+    isOpen: boolean
+    onOpenChange: (open: boolean) => void
+    currentTask: Task | null
+    isEditing: boolean
+    onSubmit: (values: TaskFormValues) => Promise<void>
 }
 
 export interface TaskActionsProps {

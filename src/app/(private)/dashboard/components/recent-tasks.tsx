@@ -1,3 +1,4 @@
+import { RecentTasksProps } from '../dashboard.types'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { ArrowRight, Link, Star } from 'lucide-react'
@@ -11,10 +12,6 @@ import { getRecentTasks } from '@/database/repositories/task.repositories'
 async function fetchRecentTasks(userId: string) {
     const tasks = await getRecentTasks(userId)
     return tasks
-}
-
-interface RecentTasksProps {
-    userId: string
 }
 
 export async function RecentTasks({ userId }: RecentTasksProps) {

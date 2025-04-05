@@ -1,5 +1,6 @@
 'use client'
 
+import { DashboardChartsContentTasksProps } from '../dashboard.types'
 import {
     Bar,
     BarChart,
@@ -15,12 +16,6 @@ import {
 import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart'
 
 import { ChartProps } from './dashboard-charts'
-
-export interface DashboardChartsContentTasksProps {
-    name: string
-    value: number
-    color: string
-}
 
 export function DashboardChartsContent({
     type,

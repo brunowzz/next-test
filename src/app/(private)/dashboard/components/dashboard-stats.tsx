@@ -1,3 +1,4 @@
+import { DashboardStatsProps } from '../dashboard.types'
 import { CheckCircle2, Circle, Clock, ListTodo } from 'lucide-react'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -7,10 +8,6 @@ import { getDashboardStats } from '@/database/repositories/task.repositories'
 async function loadStats(userId: string) {
     const data = await getDashboardStats(userId)
     return data
-}
-
-interface DashboardStatsProps {
-    userId: string
 }
 
 export async function DashboardStats({ userId }: DashboardStatsProps) {
