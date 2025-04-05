@@ -121,7 +121,7 @@ src/
 
 This application is deployed on Vercel. You can access the live version at:
 
-[https://task-management-app.vercel.app](https://task-management-app.vercel.app)
+[https://task-master-zeta-nine.vercel.app/](https://task-master-zeta-nine.vercel.app/)
 
 ## 🔒 Authentication
 
