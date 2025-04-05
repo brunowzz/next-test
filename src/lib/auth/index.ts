@@ -11,6 +11,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     pages: {
         error: '/error',
         signIn: '/login',
+        newUser: '/register',
     },
     secret: process.env.NEXTAUTH_SECRET,
     adapter: PrismaAdapter(db),
