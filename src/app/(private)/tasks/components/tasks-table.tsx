@@ -9,7 +9,7 @@ import {
     onDuplicateTask,
     onFavoriteTask,
 } from '../actions'
-import { Task, TasksTableProps } from '../tasks.types'
+import { Task, TaskFormValues, TasksTableProps } from '../tasks.types'
 import { Plus, Star } from 'lucide-react'
 import type React from 'react'
 import { useState } from 'react'
@@ -25,7 +25,7 @@ import {
 } from '@/components/ui/table'
 
 import { TaskActions } from './task-actions'
-import { TaskDialog, TaskFormValues } from './task-dialog'
+import { TaskDialog } from './task-dialog'
 
 export function TasksTable({
     tasks = [],
