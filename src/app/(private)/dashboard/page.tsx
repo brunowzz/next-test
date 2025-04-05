@@ -45,7 +45,7 @@ export default async function DashboardPage() {
                             Distribuição de tarefas por status atual
                         </CardDescription>
                     </CardHeader>
-                    <CardContent className="flex h-full items-center pl-2">
+                    <CardContent className="flex items-center pl-2">
                         <DashboardCharts userId={userId} />
                     </CardContent>
                 </Card>

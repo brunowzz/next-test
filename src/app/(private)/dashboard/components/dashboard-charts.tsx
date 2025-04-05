@@ -85,10 +85,10 @@ export async function DashboardCharts({ type = 'status', userId }: ChartProps) {
     const tasks = await getTasks(userId)
     const priority = await fetchTasksByPriority(userId)
 
-    return (
-        <DashboardChartsContent
-            tasks={type === 'status' ? tasks : priority}
-            type={type}
-        />
-    )
+    const propsMap = {
+        status: tasks,
+        priority: priority,
+    }
+
+    return <DashboardChartsContent tasks={propsMap[type]} type={type} />
 }

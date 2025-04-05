@@ -51,18 +51,23 @@ export function DashboardChartsContent({
                 }}
                 className="aspect-[2/1]"
             >
-                <BarChart data={tasks}>
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip
-                        content={<ChartTooltipContent labelKey="status" />}
-                    />
-                    <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-                        {tasks.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                    </Bar>
-                </BarChart>
+                <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={tasks}>
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip
+                            content={<ChartTooltipContent labelKey="status" />}
+                        />
+                        <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                            {tasks.map((entry, index) => (
+                                <Cell
+                                    key={`cell-${index}`}
+                                    fill={entry.color}
+                                />
+                            ))}
+                        </Bar>
+                    </BarChart>
+                </ResponsiveContainer>
             </ChartContainer>
         )
     }
