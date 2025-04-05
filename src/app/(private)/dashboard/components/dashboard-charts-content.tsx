@@ -1,6 +1,9 @@
 'use client'
 
-import { DashboardChartsContentTasksProps } from '../dashboard.types'
+import {
+    ChartProps,
+    DashboardChartsContentTasksProps,
+} from '../dashboard.types'
 import {
     Bar,
     BarChart,
@@ -14,8 +17,6 @@ import {
 } from 'recharts'
 
 import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart'
-
-import { ChartProps } from './dashboard-charts'
 
 export function DashboardChartsContent({
     type,
