@@ -1,83 +1,141 @@
-# 🚀 Teste Técnico – Vaga Part-Time
+# Task Management Application
 
-Olá, desenvolvedor(a)! Seja bem-vindo(a) ao repositório vazio que servirá como base para o seu teste. A ideia é que você faça um **fork** deste repositório e implemente as funcionalidades descritas abaixo, mantendo o código final no seu fork.
+This repository contains a task management application developed as a technical
+test. The application allows users to manage tasks, view analytics, and organize
+their work efficiently.
+
+## 🚀 Features
+
+### Core Features
+
+- **Task Management Table**
+
+    - Create, edit, delete, and list tasks
+    - Each task has a title, description, and status (To Do, In Progress,
+      Completed)
+
+- **Analytics Dashboard**
+
+    - View statistics (total tasks, completed vs. pending)
+    - Visual data representation through charts
+
+- **Task Prioritization**
+
+    - Assign priority levels (high, medium, low) to tasks
+
+- **Task Duplication**
+
+    - Clone existing tasks with all their properties
+    - Subtasks are also duplicated if present
+
+- **Favorites**
+    - Mark tasks as favorites for quick access
+
+## 🛠️ Technologies Used
+
+- **Next.js** - React framework for server-side rendering and static site
+  generation
+- **TypeScript** - For type safety and better developer experience
+- **Tailwind CSS** - For styling components
+- **Prisma** - ORM for database operations
+- **shadcn/ui** - Component library for consistent UI
+- **Auth.js** - Authentication solution
+
+## 📋 Prerequisites
+
+- Node.js (v18 or higher)
+- pnpm
+- PostgreSQL database
+
+## 🚀 Getting Started
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/brunowzz/next-test.git
+cd next-test
+```
+
+2. Install dependencies:
+
+```bash
+pnpm i
+```
+
+3. Set up environment variables: Create a `.env` file in the root directory with
+   the following variables:
+
+```
+DATABASE_URL="postgresql://username:password@localhost:5432/taskmanagement"
+NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+4. Set up the database:
+
+```bash
+pnpm prisma migrate dev --name init
+```
+
+5. Start the development server:
+
+```bash
+pnpm dev
+```
+
+6. Open [http://localhost:3000](http://localhost:3000) in your browser to see
+   the application.
+
+## 🏗️ Project Structure
+
+```
+src/
+├── app/
+│   ├── (auth)/
+│   │   ├── dashboard/
+│   │   ├── tasks/
+│   │   └── profile/
+│   ├── (public)/
+│   │   ├── login/
+│   │   └── register/
+│   └── api/
+├── components/
+│   ├── ui/
+│   ├── tasks/
+│   └── dashboard/
+├── lib/
+│   ├── auth/
+│   └── utils/
+├── database/
+│   └── prisma.service.ts
+└── types/
+```
+
+## 🚢 Deployment
+
+This application is deployed on Vercel. You can access the live version at:
+
+[https://task-management-app.vercel.app](https://task-management-app.vercel.app)
+
+## 🔒 Authentication
+
+The application uses NextAuth.js for authentication. Users can:
+
+- Register with email and password
+- Log in with existing credentials
+- Access protected routes after authentication
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for
+details.
+
+## 👨‍💻 Author
+
+Your Name - [GitHub Profile](https://github.com/brunowzz)
 
 ---
 
-## ✨ Visão Geral
-
-Você deverá desenvolver o projeto utilizando:
-
-- **Next.js**
-- **TypeScript**
-- **Tailwind CSS**
-- **Prisma**
-- **shadcn**
-
-No final, seu projeto deve ficar **no seu fork** e ser **implantado na Vercel**.
-
----
-
-## 📝 O que deve ser desenvolvido
-
-1. **Tabela de Gerenciamento de Tarefas**
-
-   - Título, descrição e status (ex.: “A Fazer”, “Em Andamento” ou “Concluída”).
-   - Operações de criação, edição, exclusão e listagem em uma tabela.
-
-2. **Dashboard de Analytics**
-
-   - Exibição de estatísticas (número total de tarefas, concluídas vs. pendentes, etc.).
-   - Pelo menos um gráfico ou algum outro tipo de visualização de dados.
-
-3. **Prioridade de Tarefas**
-
-   - Cada tarefa deve ter uma prioridade (ex.: alta, média, baixa).
-
-4. **Duplicar Tarefas**
-
-   - Funcionalidade para clonar uma tarefa existente.
-   - Se houver subtarefas (ver opcionais), elas também devem ser copiadas.
-
-5. **Favoritos**
-   - Possibilidade de marcar tarefas como favoritas, facilitando o acesso.
-
----
-
-## 🌟 Diferenciais (Opcionais)
-
-- **Subtasks**: adicionar subtarefas com título e status.
-- **Testes Automatizados**: cobertura de testes (unitários, de integração, end-to-end).
-- **Estados Globais**: uso de Redux, Zustand ou outra forma de gerenciar estado.
-- **Labels Personalizadas**: para categorizar e filtrar tarefas.
-- **Outras Funcionalidades Extras**: sinta-se à vontade para inovar!
-
----
-
-## 🔎 Avaliação
-
-- **Qualidade do Código**: organização, clareza e boas práticas.
-- **Estrutura do Projeto**: forma como arquivos e pastas são organizados.
-- **UI/UX**: aparência, usabilidade, responsividade.
-- **Domínio das Tecnologias**: uso de Next.js, TypeScript, Tailwind, Prisma e shadcn.
-- **Tempo de Execução**: agilidade na entrega do teste.
-
----
-
-## 📦 Como Entregar
-
-1. **Fork** deste repositório.
-2. Implemente a solução de acordo com os requisitos.
-3. **Faça o deploy na Vercel** após finalizar o desenvolvimento.
-4. Mantenha todo o código final **no fork**.
-5. Inclua no `README.md` (ou em outro arquivo) instruções sobre como instalar e rodar a aplicação localmente.
-6. **Envie** o **link do seu fork** e o **link da aplicação na Vercel** ao final.
-
----
-
-## 💡 Observações Finais
-
-- Utilize os componentes do **shadcn** para agilizar e padronizar a interface.
-- Organize o seu código pensando em clareza e manutenção.
-- Recursos extras ou ideias criativas são bem-vindos.
-- **Boa sorte e bons commits!** 🚀
+This project was created as part of a technical test for a part-time position.
