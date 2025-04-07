@@ -121,7 +121,7 @@ src/
 
 This application is deployed on Vercel. You can access the live version at:
 
-[https://task-master-zeta-nine.vercel.app/](https://task-master-zeta-nine.vercel.app/)
+[https://next-test-delta-green.vercel.app/](https://next-test-delta-green.vercel.app/)
 
 ## 🔒 Authentication
 
