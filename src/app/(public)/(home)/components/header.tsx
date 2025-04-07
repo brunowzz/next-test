@@ -41,7 +41,7 @@ export function Header() {
                     <Link href="/login">
                         <Button variant="ghost" size="sm">
                             Entrar
-                        </Button>
+                        </Button> 
                     </Link>
                     <Link href="/register">
                         <Button
