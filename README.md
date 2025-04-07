@@ -136,10 +136,4 @@ The application uses NextAuth.js for authentication. Users can:
 This project is licensed under the MIT License - see the LICENSE file for
 details.
 
-## 👨‍💻 Author
-
-Your Name - [GitHub Profile](https://github.com/brunowzz)
-
----
-
 This project was created as part of a technical test for a part-time position.
